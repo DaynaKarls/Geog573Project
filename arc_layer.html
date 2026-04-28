@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>pydeck</title>
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.14.0/dist/maplibre-gl.css" />
+    <script src='https://cdn.jsdelivr.net/npm/@deck.gl/jupyter-widget@~9.2.*/dist/index.js'></script>
+    <link rel="stylesheet" href=https://cdn.jsdelivr.net/npm/@deck.gl/widgets@~9.2.*/dist/stylesheet.css />
+    <style>
+    body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#deck-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+#deck-container canvas {
+  z-index: 1;
+  background: none;
+}
+
+#deck-container .error_text {
+  color: red;
+  background: none;
+  position: absolute;
+  z-index: 100;
+}
+    </style>
+  </head>
+  <body>
+    <div id="deck-container">
+    </div>
+  </body>
+  <script>
+    const container = document.getElementById('deck-container');
+    const jsonInput = {
+  "initialViewState": {
+    "bearing": -27.36,
+    "latitude": 41.97861,
+    "longitude": -87.90472,
+    "maxZoom": 15,
+    "minZoom": 1,
+    "pitch": 40.5,
+    "zoom": 6
+  },
+  "layers": [
+    {
+      "@@type": "ArcLayer",
+      "autoHighlight": true,
+      "data": [
+        {
+          "alpha": 230,
+          "dest": "LGA",
+          "dest_lat": 40.777242222,
+          "dest_lon": -73.8726055559999,
+          "flight_count": 39244,
+          "iata": "LGA",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            230
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            230
+          ],
+          "width": 5.0
+        },
+        {
+          "alpha": 127,
+          "dest": "LAX",
+          "dest_lat": 33.942496389,
+          "dest_lon": -118.408048611,
+          "flight_count": 24283,
+          "iata": "LAX",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            127
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            127
+          ],
+          "width": 4.152339383261542
+        },
+        {
+          "alpha": 125,
+          "dest": "BOS",
+          "dest_lat": 42.362944444,
+          "dest_lon": -71.0063888889999,
+          "flight_count": 23959,
+          "iata": "BOS",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            125
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            125
+          ],
+          "width": 4.130289443491225
+        },
+        {
+          "alpha": 121,
+          "dest": "DCA",
+          "dest_lat": 38.851440278,
+          "dest_lon": -77.037721389,
+          "flight_count": 23290,
+          "iata": "DCA",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            121
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            121
+          ],
+          "width": 4.084089029989491
+        },
+        {
+          "alpha": 119,
+          "dest": "DEN",
+          "dest_lat": 39.8616666670001,
+          "dest_lon": -104.673166667,
+          "flight_count": 22926,
+          "iata": "DEN",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            119
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            119
+          ],
+          "width": 4.0585592988998105
+        },
+        {
+          "alpha": 112,
+          "dest": "DFW",
+          "dest_lat": 32.8972330560001,
+          "dest_lon": -97.037694722,
+          "flight_count": 21821,
+          "iata": "DFW",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            112
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            112
+          ],
+          "width": 3.9792752189987652
+        },
+        {
+          "alpha": 107,
+          "dest": "EWR",
+          "dest_lat": 40.6924805560001,
+          "dest_lon": -74.1686877779999,
+          "flight_count": 20859,
+          "iata": "EWR",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            107
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            107
+          ],
+          "width": 3.9079304448382897
+        },
+        {
+          "alpha": 107,
+          "dest": "ATL",
+          "dest_lat": 33.636699611,
+          "dest_lon": -84.4278639999999,
+          "flight_count": 20816,
+          "iata": "ATL",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            107
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            107
+          ],
+          "width": 3.904688218617316
+        },
+        {
+          "alpha": 105,
+          "dest": "PHX",
+          "dest_lat": 33.434277778,
+          "dest_lon": -112.011583333,
+          "flight_count": 20413,
+          "iata": "PHX",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            105
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            105
+          ],
+          "width": 3.8740721071649276
+        },
+        {
+          "alpha": 104,
+          "dest": "MSP",
+          "dest_lat": 44.8819722220001,
+          "dest_lon": -93.221777778,
+          "flight_count": 20350,
+          "iata": "MSP",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            104
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            104
+          ],
+          "width": 3.869247938100825
+        },
+        {
+          "alpha": 98,
+          "dest": "DTW",
+          "dest_lat": 42.2124311110001,
+          "dest_lon": -83.353393333,
+          "flight_count": 19206,
+          "iata": "DTW",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            98
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            98
+          ],
+          "width": 3.779777799875532
+        },
+        {
+          "alpha": 98,
+          "dest": "LAS",
+          "dest_lat": 36.080342778,
+          "dest_lon": -115.152448611,
+          "flight_count": 19137,
+          "iata": "LAS",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            98
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            98
+          ],
+          "width": 3.774264025307321
+        },
+        {
+          "alpha": 95,
+          "dest": "MCO",
+          "dest_lat": 28.4293888890001,
+          "dest_lon": -81.309,
+          "flight_count": 18621,
+          "iata": "MCO",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            95
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            95
+          ],
+          "width": 3.7325858381181645
+        },
+        {
+          "alpha": 91,
+          "dest": "IAH",
+          "dest_lat": 29.984435278,
+          "dest_lon": -95.3414425,
+          "flight_count": 17908,
+          "iata": "IAH",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            91
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            91
+          ],
+          "width": 3.673654114433051
+        },
+        {
+          "alpha": 91,
+          "dest": "SEA",
+          "dest_lat": 47.4498888890001,
+          "dest_lon": -122.311777778,
+          "flight_count": 17795,
+          "iata": "SEA",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            91
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            91
+          ],
+          "width": 3.664165568287709
+        },
+        {
+          "alpha": 88,
+          "dest": "BNA",
+          "dest_lat": 36.1244750000001,
+          "dest_lon": -86.678180556,
+          "flight_count": 17381,
+          "iata": "BNA",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            88
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            88
+          ],
+          "width": 3.629041109950447
+        },
+        {
+          "alpha": 88,
+          "dest": "SFO",
+          "dest_lat": 37.618805556,
+          "dest_lon": -122.375416667,
+          "flight_count": 17218,
+          "iata": "SFO",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            88
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            88
+          ],
+          "width": 3.6150528540426476
+        },
+        {
+          "alpha": 79,
+          "dest": "CLT",
+          "dest_lat": 35.213186944,
+          "dest_lon": -80.951379167,
+          "flight_count": 15559,
+          "iata": "CLT",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            79
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            79
+          ],
+          "width": 3.4671822147773463
+        },
+        {
+          "alpha": 78,
+          "dest": "PHL",
+          "dest_lat": 39.8720838890001,
+          "dest_lon": -75.240663056,
+          "flight_count": 15289,
+          "iata": "PHL",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            78
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            78
+          ],
+          "width": 3.44209994528802
+        },
+        {
+          "alpha": 78,
+          "dest": "MIA",
+          "dest_lat": 25.795361111,
+          "dest_lon": -80.290115833,
+          "flight_count": 15195,
+          "iata": "MIA",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            78
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            78
+          ],
+          "width": 3.433296034844803
+        },
+        {
+          "alpha": 72,
+          "dest": "STL",
+          "dest_lat": 38.748698222,
+          "dest_lon": -90.370025722,
+          "flight_count": 14036,
+          "iata": "STL",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            72
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            72
+          ],
+          "width": 3.32153350003696
+        },
+        {
+          "alpha": 71,
+          "dest": "IND",
+          "dest_lat": 39.717305556,
+          "dest_lon": -86.2946388889999,
+          "flight_count": 13743,
+          "iata": "IND",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            71
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            71
+          ],
+          "width": 3.2922820935623225
+        },
+        {
+          "alpha": 69,
+          "dest": "MKE",
+          "dest_lat": 42.946931944,
+          "dest_lon": -87.897064444,
+          "flight_count": 13383,
+          "iata": "MKE",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            69
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            69
+          ],
+          "width": 3.255750879446872
+        },
+        {
+          "alpha": 68,
+          "dest": "CLE",
+          "dest_lat": 41.4094069440001,
+          "dest_lon": -81.854691111,
+          "flight_count": 12999,
+          "iata": "CLE",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            68
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            68
+          ],
+          "width": 3.2160354280352847
+        },
+        {
+          "alpha": 67,
+          "dest": "CMH",
+          "dest_lat": 39.996946667,
+          "dest_lon": -82.892159167,
+          "flight_count": 12767,
+          "iata": "CMH",
+          "lat_o": 41.997805555,
+          "lng_o": -87.90611111,
+          "source_color": [
+            255,
+            140,
+            0,
+            67
+          ],
+          "target_color": [
+            0,
+            180,
+            255,
+            67
+          ],
+          "width": 3.191650736992041
+        }
+      ],
+      "getSourceColor": "@@=source_color",
+      "getSourcePosition": "@@=[lng_o, lat_o]",
+      "getTargetColor": "@@=target_color",
+      "getTargetPosition": "@@=[dest_lon, dest_lat]",
+      "getTilt": 15,
+      "getWidth": "@@=width",
+      "id": "2ea7c984-e1b0-486d-a7b3-4aab02afdd81",
+      "pickable": true
+    }
+  ],
+  "mapProvider": "carto",
+  "mapStyle": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+  "views": [
+    {
+      "@@type": "MapView",
+      "controller": true
+    }
+  ]
+};
+    const tooltip = true;
+    const customLibraries = null;
+    const configuration = null;
+
+    const deckInstance = createDeck({
+                  container,
+      jsonInput,
+      tooltip,
+      customLibraries,
+      configuration,
+          });
+
+  </script>
+</html>
